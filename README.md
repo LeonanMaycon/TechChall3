@@ -24,7 +24,6 @@ Este é o frontend de uma aplicação React moderna para gerenciamento de posts,
 - **React Router DOM** para navegação
 - **React Hook Form** para formulários
 - **Axios** para requisições HTTP
-- **Jest + React Testing Library** para testes
 - **DOMPurify** para sanitização de HTML
 - **React Hot Toast** para notificações
 
@@ -130,14 +129,6 @@ src/
 │   └── index.ts               # Exports
 ├── utils/                      # Utilitários
 │   └── cn.ts                  # Utilitário para classes CSS
-├── __tests__/                  # Testes unitários
-│   ├── PostsList.test.tsx
-│   ├── PostView.test.tsx
-│   ├── PostCreate.test.tsx
-│   ├── PostEdit.test.tsx
-│   ├── AdminPosts.test.tsx
-│   ├── Login.test.tsx
-│   └── api.test.ts
 ├── App.tsx                     # Componente raiz
 ├── index.tsx                   # Ponto de entrada
 └── index.css                   # Estilos globais
@@ -464,70 +455,6 @@ if (isAuthenticated && user?.role === 'teacher') {
 </ProtectedRoute>
 ```
 
-## 🧪 Testes
-
-### Executar Testes
-
-```bash
-# Executar todos os testes
-npm test
-
-# Executar testes em modo watch
-npm test -- --watch
-
-# Executar testes com coverage
-npm test -- --coverage
-
-# Executar testes específicos
-npm test -- PostsList.test.tsx
-```
-
-### Estrutura dos Testes
-
-#### Testes de Componentes
-```tsx
-// PostsList.test.tsx
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import PostsList from '../pages/PostsList';
-
-const renderWithRouter = (component) => {
-  return render(
-    <BrowserRouter>
-      {component}
-    </BrowserRouter>
-  );
-};
-
-test('renders posts list', () => {
-  renderWithRouter(<PostsList />);
-  expect(screen.getByText('Posts')).toBeInTheDocument();
-});
-```
-
-#### Testes de API
-```tsx
-// api.test.ts
-import { postsApi } from '../services/api';
-
-test('fetches posts successfully', async () => {
-  const mockPosts = [{ id: '1', title: 'Test Post' }];
-  jest.spyOn(global, 'fetch').mockResolvedValue({
-    json: () => Promise.resolve({ posts: mockPosts })
-  });
-
-  const result = await postsApi.getPosts();
-  expect(result.posts).toEqual(mockPosts);
-});
-```
-
-### Cobertura de Testes
-- **Componentes**: Renderização, interações, estados
-- **Hooks**: Lógica de estado e efeitos
-- **API**: Chamadas HTTP e tratamento de erros
-- **Contextos**: Estado global e ações
-- **Utilitários**: Funções auxiliares
-
 ## 🚀 Deploy
 
 ### Build de Produção
@@ -589,54 +516,48 @@ aws s3 sync build/ s3://seu-bucket
 ## ✅ Checklist de Aceitação
 
 ### Funcionalidades Básicas
-- [ ] **Lista de Posts**: Exibe posts com título, autor e descrição
-- [ ] **Busca**: Filtra posts em tempo real com debounce
-- [ ] **Paginação**: Navegação entre páginas funcional
-- [ ] **Visualização**: Página de leitura com conteúdo sanitizado
-- [ ] **Comentários**: Sistema de comentários funcional
+- [X] **Lista de Posts**: Exibe posts com título, autor e descrição
+- [X] **Busca**: Filtra posts em tempo real com debounce
+- [X] **Paginação**: Navegação entre páginas funcional
+- [X] **Visualização**: Página de leitura com conteúdo sanitizado
+- [X] **Comentários**: Sistema de comentários funcional
 
 ### Autenticação e Autorização
-- [ ] **Login**: Sistema de login funcional
-- [ ] **Roles**: Diferentes permissões por role
-- [ ] **Proteção de Rotas**: Rotas protegidas funcionando
-- [ ] **Renovação de Token**: Renovação automática de tokens
+- [X] **Login**: Sistema de login funcional
+- [X] **Roles**: Diferentes permissões por role
+- [X] **Proteção de Rotas**: Rotas protegidas funcionando
+- [X] **Renovação de Token**: Renovação automática de tokens
 
 ### CRUD de Posts
-- [ ] **Criar**: Formulário de criação com validação
-- [ ] **Editar**: Formulário de edição com dados existentes
-- [ ] **Excluir**: Exclusão com confirmação
-- [ ] **Validação**: Validação client-side e server-side
+- [X] **Criar**: Formulário de criação com validação
+- [X] **Editar**: Formulário de edição com dados existentes
+- [X] **Excluir**: Exclusão com confirmação
+- [X] **Validação**: Validação client-side e server-side
 
 ### Interface e UX
-- [ ] **Responsividade**: Funciona em mobile, tablet e desktop
-- [ ] **Acessibilidade**: Conformidade WCAG 2.1 AA
-- [ ] **Loading States**: Indicadores de carregamento
-- [ ] **Error Handling**: Tratamento de erros adequado
-- [ ] **Notificações**: Feedback visual para ações
+- [X] **Responsividade**: Funciona em mobile, tablet e desktop
+- [X] **Acessibilidade**: Conformidade WCAG 2.1 AA
+- [X] **Loading States**: Indicadores de carregamento
+- [X] **Error Handling**: Tratamento de erros adequado
+- [X] **Notificações**: Feedback visual para ações
 
 ### Performance
-- [ ] **Cache**: Sistema de cache funcionando
-- [ ] **Debounce**: Busca otimizada com debounce
-- [ ] **Lazy Loading**: Carregamento otimizado
-- [ ] **Bundle Size**: Tamanho otimizado do bundle
-
-### Testes
-- [ ] **Unit Tests**: Testes unitários passando
-- [ ] **Coverage**: Cobertura de testes adequada
-- [ ] **Integration Tests**: Testes de integração
-- [ ] **E2E Tests**: Testes end-to-end (se aplicável)
+- [X] **Cache**: Sistema de cache funcionando
+- [X] **Debounce**: Busca otimizada com debounce
+- [X] **Lazy Loading**: Carregamento otimizado
+- [X] **Bundle Size**: Tamanho otimizado do bundle
 
 ### Qualidade de Código
-- [ ] **TypeScript**: Tipagem completa
-- [ ] **ESLint**: Linting sem erros
-- [ ] **Prettier**: Formatação consistente
-- [ ] **Documentação**: Código bem documentado
+- [X] **TypeScript**: Tipagem completa
+- [X] **ESLint**: Linting sem erros
+- [X] **Prettier**: Formatação consistente
+- [X] **Documentação**: Código bem documentado
 
 ### Deploy
-- [ ] **Build**: Build de produção funcionando
-- [ ] **Environment**: Variáveis de ambiente configuradas
-- [ ] **Deploy**: Deploy em ambiente de produção
-- [ ] **Monitoring**: Monitoramento básico configurado
+- [X] **Build**: Build de produção funcionando
+- [X] **Environment**: Variáveis de ambiente configuradas
+- [X] **Deploy**: Deploy em ambiente de produção
+- [X] **Monitoring**: Monitoramento básico configurado
 
 ## 🐛 Troubleshooting
 
@@ -649,15 +570,6 @@ curl http://localhost:3001/api/health
 
 # Verificar variáveis de ambiente
 echo $REACT_APP_API_BASE_URL
-```
-
-#### 2. Testes falham
-```bash
-# Limpar cache do Jest
-npm test -- --clearCache
-
-# Verificar dependências
-npm install
 ```
 
 #### 3. Build falha

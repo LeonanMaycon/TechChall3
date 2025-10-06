@@ -96,7 +96,6 @@ function postsReducer(state, action) {
         ...state,
         posts: action.payload,
         // 50+ linhas de lógica complexa
-        // Dificulta manutenção e testes
       };
   }
 }
