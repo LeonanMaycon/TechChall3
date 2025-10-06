@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globais para acessibilidade e sistema de design */
+
+@layer base {
+  /* Configurações de fonte e texto para melhor legibilidade */
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Melhorar contraste e legibilidade do texto */
+  body {
+    @apply text-secondary-900 bg-background-primary;
+    line-height: 1.6;
+  }
+
+  /* Headings com hierarquia clara */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-secondary-900;
+    line-height: 1.3;
+  }
+
+  h1 { @apply text-4xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
+  h4 { @apply text-xl; }
+  h5 { @apply text-lg; }
+  h6 { @apply text-base; }
+
+  /* Links acessíveis */
+  a {
+    @apply text-primary-600 hover:text-primary-700 focus:text-primary-700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:focus {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 rounded-sm;
+  }
+
+  /* Botões com foco visível */
+  button:focus {
+    @apply outline-none;
+  }
+
+  /* Inputs com foco acessível */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  /* Classe utilitária para foco acessível */
+  .focus-visible {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  /* Classe para elementos interativos */
+  .interactive {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  /* Classe para elementos clicáveis */
+  .clickable {
+    @apply cursor-pointer select-none;
+  }
+
+  /* Classe para elementos desabilitados */
+  .disabled {
+    @apply opacity-50 cursor-not-allowed pointer-events-none;
+  }
+
+  /* Classe para texto de erro */
+  .text-error {
+    @apply text-error-600;
+  }
+
+  /* Classe para texto de sucesso */
+  .text-success {
+    @apply text-success-600;
+  }
+
+  /* Classe para texto de aviso */
+  .text-warning {
+    @apply text-warning-600;
+  }
+
+  /* Classe para texto secundário */
+  .text-muted {
+    @apply text-secondary-500;
+  }
+
+  /* Classe para texto de ajuda */
+  .text-helper {
+    @apply text-sm text-secondary-500;
+  }
+}
+
+@layer utilities {
+  /* Utilitários de acessibilidade */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Utilitários de foco */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .focus-ring-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset;
+  }
+
+  /* Utilitários de contraste */
+  .high-contrast {
+    @apply text-secondary-900 bg-white;
+  }
+
+  .low-contrast {
+    @apply text-secondary-600 bg-neutral-50;
+  }
+
+  /* Utilitários de movimento */
+  .motion-safe {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .motion-reduce {
+    @apply transition-none;
+  }
+
+  /* Utilitários de responsividade */
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .flex-responsive {
+    @apply flex flex-col md:flex-row gap-4;
+  }
+}
+
+/* Configurações específicas para reduzir movimento (prefers-reduced-motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Configurações para alto contraste (prefers-contrast: high) */
+@media (prefers-contrast: high) {
+  .focus-ring {
+    @apply focus:ring-4 focus:ring-offset-4;
+  }
+  
+  .border {
+    @apply border-2;
+  }
+}
+
+/* Configurações para modo escuro (prefers-color-scheme: dark) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0f172a;
+    --color-foreground: #f8fafc;
+  }
+  
+  body {
+    @apply bg-background-dark text-text-inverse;
+  }
+  
+  .high-contrast {
+    @apply text-text-inverse bg-background-dark;
+  }
+}
