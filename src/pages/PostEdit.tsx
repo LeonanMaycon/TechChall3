@@ -84,11 +84,11 @@ const PostEdit: React.FC = () => {
         content: data.content.trim(),
       };
 
-      const updatedPost = await postsApi.updatePost(updateParams);
+      await postsApi.updatePost(updateParams);
 
       toast.success("Post atualizado com sucesso!");
 
-      navigate(`/posts/${updatedPost._id}`);
+      navigate(`/`);
     } catch (error: any) {
       console.error("Error updating post:", error);
 
